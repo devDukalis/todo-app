@@ -1,5 +1,5 @@
-function Form({ handleSubmit, children }) {
-  return <form onSubmit={handleSubmit}>{children}</form>;
+function Form({ onSubmit, children }) {
+  return <form onSubmit={onSubmit}>{children}</form>;
 }
 
 export default Form;
