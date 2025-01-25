@@ -15,9 +15,12 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [filter, setFilter] = useState("all");
+  const [editedTodoId, setEditedTodoId] = useState(null);
+  const [editedInputValue, setEditedInputValue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (inputValue.trim()) {
       const newTodo = {
         id: window.self.crypto.randomUUID(),
@@ -54,14 +57,35 @@ function App() {
   const filteredTodos = todoList.filter((todo) => {
     if (filter === "active") return !todo.completed;
     if (filter === "completed") return todo.completed;
+
     return true;
   });
 
   const activeTodoCount = todoList.filter((todo) => !todo.completed).length;
 
+  const editTodo = (id) => {
+    if (editedTodoId === id) {
+      const updatedTodos = todoList.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, text: editedInputValue };
+        }
+
+        return todo;
+      });
+
+      setTodoList(updatedTodos);
+      setEditedTodoId(null);
+      setEditedInputValue("");
+    } else {
+      const todoToEdit = todoList.find((todo) => todo.id === id);
+      setEditedTodoId(id);
+      setEditedInputValue(todoToEdit.text);
+    }
+  };
+
   return (
     <Section className="todoapp">
-      <Header className="header" value="todos" />
+      <Header className="header" value="Todos" />
 
       <Form onSubmit={handleSubmit}>
         <Input
@@ -83,6 +107,10 @@ function App() {
                 completed={todo.completed}
                 onToggle={() => toggleTodo(todo.id)}
                 onDelete={() => deleteTodo(todo.id)}
+                onEdit={() => editTodo(todo.id)}
+                isEditing={editedTodoId === todo.id}
+                editedInputValue={editedInputValue}
+                setEditedInputValue={setEditedInputValue}
               />
             </ListItem>
           ))}
@@ -91,7 +119,9 @@ function App() {
         <Footer className="footer">
           <Span
             className="todo-count"
-            value={`${activeTodoCount} items left`}
+            value={`${activeTodoCount} item${
+              activeTodoCount !== 1 ? "s" : ""
+            } left`}
           />
 
           <List className="filters">

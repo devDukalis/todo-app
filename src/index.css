@@ -240,10 +240,10 @@ body {
 .todo-list li .icon {
   position: absolute;
   top: 0;
-  bottom: -3px;
+  bottom: 5px;
   width: 30px;
   height: 40px;
-  font-size: 34px;
+  font-size: 40px;
   color: #cc9a9a;
   margin: auto 0 11px;
   transition: color 0.2s ease-out;
@@ -263,7 +263,7 @@ body {
 }
 
 .todo-list li .icon-edit {
-  font-size: 19px;
+  font-size: 24px;
   right: 45px;
 }
 
@@ -381,6 +381,19 @@ html .clear-completed:active {
 
 .info a:hover {
   text-decoration: underline;
+}
+
+.edit-input,
+.description {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.completed {
+  text-decoration: line-through;
 }
 
 /*
