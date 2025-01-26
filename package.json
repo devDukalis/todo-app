@@ -10,7 +10,10 @@
     "lint:check": "eslint . --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --fix --report-unused-disable-directives --max-warnings 0",
     "prettier:check": "prettier . --check . ",
-    "prettier:format": "prettier \"**/*.{html,css,js,jsx,json,md}\" --cache --write"
+    "prettier:format": "prettier \"**/*.{html,css,js,jsx,json,md}\" --cache --write",
+    "husky:prepare": "husky",
+    "husky:pre-commit": "echo npx lint-staged > .husky/pre-commit",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
@@ -32,6 +35,8 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.2",
     "prettier": "^3.4.2",
     "vite": "^6.0.5"
   }
