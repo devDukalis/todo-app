@@ -1,4 +1,5 @@
 import { useId, forwardRef } from "react";
+
 import Label from "../../components/Label/Label";
 
 const Input = forwardRef(function Input(
@@ -13,7 +14,7 @@ const Input = forwardRef(function Input(
     readOnly,
     ...rest
   },
-  ref
+  ref,
 ) {
   const id = useId();
 

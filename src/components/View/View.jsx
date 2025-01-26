@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-
 import { formatDistanceToNow } from "date-fns";
 
 import Input from "../../components/Input/Input";

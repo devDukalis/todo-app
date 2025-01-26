@@ -3,25 +3,42 @@ import globals from "globals";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import importPlugin from "eslint-plugin-import";
+import prettier from "eslint-plugin-prettier";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 
 export default [
-  { ignores: ["dist"] },
+  { ignores: ["dist", "node_modules", "build"] },
   {
     files: ["**/*.{js,jsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      ecmaVersion: 2021,
+      globals: {
+        ...globals.browser,
+        module: true,
+      },
       parserOptions: {
-        ecmaVersion: "latest",
+        ecmaVersion: 12,
         ecmaFeatures: { jsx: true },
         sourceType: "module",
       },
     },
-    settings: { react: { version: "18.3" } },
+    settings: {
+      react: { version: "18.3" },
+      "import/resolver": {
+        node: {
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
+          moduleDirectory: ["node_modules", "src/"],
+        },
+      },
+    },
     plugins: {
       react,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      import: importPlugin,
+      jsxA11y,
+      prettier,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -34,6 +51,26 @@ export default [
         { allowConstantExport: true },
       ],
       "react/prop-types": "off",
+      indent: ["error", 2],
+      "linebreak-style": [0, "unix"],
+      quotes: ["error", "double", { allowTemplateLiterals: true }],
+      semi: ["error", "always", { omitLastInOneLineClassBody: true }],
+      "import/no-unresolved": [2, { caseSensitive: false }],
+      "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+      "import/order": [
+        2,
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+          ],
+          "newlines-between": "always",
+        },
+      ],
     },
   },
 ];

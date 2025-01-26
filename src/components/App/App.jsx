@@ -119,9 +119,7 @@ function App() {
         <Footer className="footer">
           <Span
             className="todo-count"
-            value={`${activeTodoCount} item${
-              activeTodoCount !== 1 ? "s" : ""
-            } left`}
+            value={`${activeTodoCount} item${activeTodoCount !== 1 ? "s" : ""} left`}
           />
 
           <List className="filters">
