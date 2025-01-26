@@ -13,6 +13,7 @@
     "prettier:format": "prettier \"**/*.{html,css,js,jsx,json,md}\" --cache --write",
     "husky:prepare": "husky",
     "husky:pre-commit": "echo npx lint-staged > .husky/pre-commit",
+    "husky:commit-msg": "echo npx --no-install commitlint --edit \"$1\" > .husky/commit-msg",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -21,6 +22,8 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "@eslint/js": "^9.17.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
